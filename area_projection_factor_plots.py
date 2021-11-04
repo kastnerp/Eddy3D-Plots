@@ -1,7 +1,7 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import math
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 
 def projected_angle_fac_park_tuller(theta, mode="both"):
@@ -49,7 +49,7 @@ def projected_cylinder_area(theta, r, h):
     return math.pi * r ** 2 * math.sin(theta) + diameter * h * math.cos(theta)
 
 
-h = 2
+h = 1.75
 r = 0.3
 
 cyl_surf_area = 2 * r ** 2 * math.pi + 2 * r * math.pi * h
