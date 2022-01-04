@@ -5,9 +5,9 @@ import pandas as pd
 from io import StringIO
 import scipy.optimize as scy
 import matplotlib.pyplot as plt
+import proplot as pplt
 
-
-dims = (6, 3)
+dims = (6, 2.5)
 
 
 
@@ -107,4 +107,43 @@ plt.tight_layout()
 plt.savefig("Darcy_Forchheimer_Fit.pdf")
 plt.savefig("Darcy_Forchheimer_Fit.png", dpi=600)
 plt.show()
+
+
+
+
+# ProPlot
+
+
+for i, d in enumerate(data):
+
+    print(i, d)
+
+    # fit curve
+    popt, _ = scy.curve_fit(objective, d['x'], d['y'])
+
+    xx =  np.linspace(0,10,100)
+    yy = [objective(j, popt[0], popt[1], popt[2]) for j in xx]
+
+    fig = pplt.figure(share=False)
+    ax = fig.subplot(title='Alternate y twin x')
+
+    ax.plot(d)
+    ax.plot(d)
+
+
+#
+
+#
+
+ax.set(xlim=(0, 10), ylim=(0, 150))
+ax.set(xlabel="U [m/s]", ylabel='$\Delta$P [Pa]')
+# Put the legend out of the figure
+pplt.legend()
+#plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+pplt.tight_layout()
+
+# plt.text(0.5, 0.5, 'matplotlib', horizontalalignment='center',   verticalalignment='center', transform=ax.transAxes)
+pplt.savefig("Darcy_Forchheimer_Fit_pplot.pdf")
+pplt.savefig("Darcy_Forchheimer_Fit_pplot.png", dpi=600)
+pplt.show()
 
